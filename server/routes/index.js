@@ -4,6 +4,10 @@ var router = express.Router()
 router.get('/', function(req, res){
     res.sendfile(path.join(__dirname,'../../client/index.html'))
 })
+
+// router.get('/', function(req, res){
+//     res.sendfile(path.join(__dirname,'../../client/index.html'))
+// })
 module.exports = router
 // app.get('/', function(req, res){
 //     res.sendfile(path.join(__dirname,'index.html'))

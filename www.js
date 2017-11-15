@@ -1,10 +1,10 @@
 var app = require('./server/server')
 //server app
-var port  = 8000;
-app.listen(port, function(){
-    console.log('localhost running:'+ port)
-})
 
-//run commands
-//npm run webpack
-//node www
+const argsPort = process.argv.slice(2);
+var port  = argsPort[0] || 8000;
+
+app.listen(port, function(){
+    console.log('localhost running:'+ port+' at '+ new Date())
+    console.log('url', 'http://localhost:'+port)
+});             

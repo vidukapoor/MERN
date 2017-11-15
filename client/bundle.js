@@ -973,6 +973,7 @@ var _app2 = _interopRequireDefault(_app);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// console.log(App);
 _reactDom2.default.render(_react2.default.createElement(_app2.default, null), document.getElementById('app'));
 
 /***/ }),
@@ -21199,30 +21200,70 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_Component) {
-    _inherits(App, _Component);
+var AppContainer = function (_Component) {
+    _inherits(AppContainer, _Component);
 
-    function App() {
-        _classCallCheck(this, App);
+    function AppContainer(props) {
+        var _ret;
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        _classCallCheck(this, AppContainer);
+
+        var _this = _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).call(this, props));
+
+        _this.object = {};
+        _this.handleSave = _this.handleSave.bind(_this);
+        _this.getAllValues = _this.getAllValues.bind(_this);
+        return _ret = _this, _possibleConstructorReturn(_this, _ret);
     }
 
-    _createClass(App, [{
+    _createClass(AppContainer, [{
+        key: "handleSave",
+        value: function handleSave() {
+            console.log(this.object);
+        }
+    }, {
+        key: "getAllValues",
+        value: function getAllValues(fieldName, value) {
+            this.object[fieldName] = value;
+        }
+    }, {
         key: "render",
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
-                "h2",
+                "div",
                 null,
-                "App started here..."
+                _react2.default.createElement(
+                    "h2",
+                    null,
+                    "User details"
+                ),
+                _react2.default.createElement("input", { placeholder: "name", type: "text", onChange: function onChange(event) {
+                        return _this2.getAllValues("name", event.target.value);
+                    } }),
+                _react2.default.createElement("br", null),
+                _react2.default.createElement("input", { placeholder: "phone number", type: "number", onChange: function onChange(event) {
+                        return _this2.getAllValues("contact", event.target.value);
+                    } }),
+                _react2.default.createElement("br", null),
+                _react2.default.createElement("input", { placeholder: "email", type: "email", onChange: function onChange(event) {
+                        return _this2.getAllValues("email", event.target.value);
+                    } }),
+                _react2.default.createElement("br", null),
+                _react2.default.createElement(
+                    "button",
+                    { onClick: this.handleSave },
+                    "Submit Details"
+                )
             );
         }
     }]);
 
-    return App;
+    return AppContainer;
 }(_react.Component);
 
-exports.default = App;
+exports.default = AppContainer;
 
 /***/ })
 /******/ ]);
