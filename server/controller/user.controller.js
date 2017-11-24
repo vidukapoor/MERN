@@ -35,5 +35,5 @@ class UserHandlers{
 const userHandlers = new UserHandlers();
 module.exports = userHandlers;
 
-//lean(); use for the finding of the like fetch
+//lean(); use for the finding of the like fetch is 
 // const abc = await userModel.find().count().lean().exec();

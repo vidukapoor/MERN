@@ -24,7 +24,7 @@ router.post('/createuser', function(req, res){
 
 router.get('/getusers', function(req, res){
     var response = userHandlers.getuser((success)=>{
-        res.json(success)
+        res.json(success);
     });
 })
 module.exports = router;
