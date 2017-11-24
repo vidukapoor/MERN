@@ -967,14 +967,14 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _app = __webpack_require__(32);
+var _appContainer = __webpack_require__(32);
 
-var _app2 = _interopRequireDefault(_app);
+var _appContainer2 = _interopRequireDefault(_appContainer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // console.log(App);
-_reactDom2.default.render(_react2.default.createElement(_app2.default, null), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(_appContainer2.default, null), document.getElementById('app'));
 
 /***/ }),
 /* 16 */
@@ -21254,7 +21254,7 @@ var AppContainer = function (_Component) {
                 _react2.default.createElement(
                     "button",
                     { onClick: this.handleSave },
-                    "Submit Details"
+                    "Submit Details here"
                 )
             );
         }

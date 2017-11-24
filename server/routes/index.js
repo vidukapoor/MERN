@@ -23,8 +23,16 @@ router.post('/createuser', function(req, res){
 })
 
 router.get('/getusers', function(req, res){
-    var response = userHandlers.getuser((success)=>{
+    var response = userHandlers.getusers((success)=>{
         res.json(success);
     });
 })
+
+router.get('/getusers/:userId', function (req, res) {
+    const payload = req.params;
+    const response = userHandlers.finduser(payload, (success)=>{
+        res.json(success)
+    })
+})
+
 module.exports = router;

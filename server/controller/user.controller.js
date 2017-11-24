@@ -22,13 +22,27 @@ class UserHandlers{
         }   
     }
 
-    getuser(cb){
+    getusers(cb){
         try{
             userModel.find((err,res)=>{
                 cb({success:true,result:res});       
             });
         }catch(e){
             cb({success:false, result:e.message});
+        }
+    }
+
+    finduser(payload, cb){
+        const userId = payload.userId;
+        try{
+            userModel.findOne({_id:userId},(err, res)=>{
+                if(res)
+                    cb({success:true, result:res})
+                else
+                    cb({success:false, result:"Invalid user"})    
+            })
+        }catch(e){
+            cb({success:false, result:e.message})
         }
     }
 }
