@@ -7,6 +7,8 @@ module.exports = {
         path : path.join(__dirname, "client"),
         filename: 'bundle.js'
     },
+    //devtool is used for viewing files on client side
+    devtool:"source-map",                   
     module:{
         loaders : [{
             test: /.jsx?$/,
