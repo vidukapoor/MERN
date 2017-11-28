@@ -38,4 +38,21 @@ app.use(function(err, req, res, next){
 // app.listen(port, function(){
 //     console.log('localhost running:'+ port)
 // })
+
+//working of promise
+
+// let promise = new Promise((resolve, reject)=>{
+//     setTimeout(function(){
+//         resolve('done data response');
+//     })
+//     reject('promise rejecteddddddddddd')
+// })
+// if(promise){
+//     promise.then((body)=>{
+//         console.log('jhjhj', body)
+//     }).catch(function(reason){
+//         console.log("aaaaa",reason)
+//     })
+// }
+
 module.exports = app;

@@ -1,4 +1,4 @@
-const userModel = require('../models/user');
+const userModel = require('../models/user_model');
 
 class UserHandlers{
     constructor(){

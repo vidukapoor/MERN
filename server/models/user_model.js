@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     mobileNumber: Number,
-    email : String,
+    email : {type:String, unique: true},
     timeStamp: {type:Date, default:new Date()}
 });
 module.exports = mongoose.model("user", userSchema);
