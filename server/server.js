@@ -2,7 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var express = require('express');
 var app = express();
-var indexRoutes = require('./routes/index');
+var indexRoutes = require('./routes/restDispatcher');
 const mongo = require('./mongo/mongoconfig');
 const bodyParser = require('body-parser');         //for getting body in request
 

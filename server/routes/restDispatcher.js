@@ -14,10 +14,9 @@ router.get('/bird', function (req, res) {
 })
 
 router.post('/createuser', function(req, res){
-    console.log("req.body", req.body);
+    console.log("createuser path hit");
     const body = req.body;
     var response = userHandlers.createuser(body, (success)=>{
-        console.log('success', success);
         res.json(success)
     });
 })

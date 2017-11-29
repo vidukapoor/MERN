@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import Utils from "../utils/requests"
+const createuser = "http://localhost:8000/createuser"
 
 class AppContainer extends Component{
     constructor(props){
@@ -11,6 +13,14 @@ class AppContainer extends Component{
 
     handleSave (){
         console.log(this.object)
+        Utils.sendXmlHttpRequest(createuser, 'POST', this.object, (success, error) =>{
+            console.log(success)
+            if(success && success.status){
+                alert('data saved')
+            }else{
+                alert('data saved error')
+            }
+        })
     }
     
     getAllValues(fieldName, value){
@@ -26,7 +36,7 @@ class AppContainer extends Component{
                 <input placeholder="phone number" type="number" onChange={event => this.getAllValues("contact", event.target.value)}/>
                 <br/>
                 <input placeholder="email" type="email" onChange={event => this.getAllValues("email", event.target.value)}/><br/>
-                <button onClick={this.handleSave}>Submit Details here</button>
+                <button onClick={this.handleSave}>Submit Details</button>
             </div>
         )   
     }
