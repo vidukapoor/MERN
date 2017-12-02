@@ -10,8 +10,6 @@ const taskSchema = new mongoose.Schema({
 module.exports = mongoose.model("tasks", taskSchema);
 
 
-https://reacttraining.com/react-router/web/example/route-config
+//https://reacttraining.com/react-router/web/example/route-config
 
-https://www.youtube.com/watch?v=l9eyot_IXLY
-
-https://www.npmjs.com/package/react-router
+//https://www.youtube.com/watch?v=l9eyot_IXLY

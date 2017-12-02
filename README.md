@@ -17,3 +17,7 @@ closing node instance
     auto start
         npm install -g nodemon    ------globally recommended
         nodemon www
+
+git ignore included
+React router config added
+UI flow included

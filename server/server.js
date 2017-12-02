@@ -23,6 +23,11 @@ app.use(express.static(path.join(__dirname, '../client') ));
 //routes
 app.use('/', indexRoutes);
 
+//usage with the fix of refresh issue accepts all the routes
+app.get('*', (request, response) => {
+    response.sendFile(path.resolve(__dirname, '../client/index.html'))
+});
+
 //error
 app.use(function(err, req, res, next){
     res.status(err.status || 500);

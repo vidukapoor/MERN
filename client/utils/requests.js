@@ -28,6 +28,16 @@ class utils {
                 xmlhttp.send(JSON.stringify(data));
         }
     }
+
+    fieldValidations(elements) {
+        for (var  key in  elements) {
+          let element = elements[key];
+            if (element && element.getAttribute('data-required') && !element.value) {
+              return element.getAttribute('errMsg');
+            }
+        }
+      
+      }
 }
 const Utils = new utils()
 module.exports = Utils;
