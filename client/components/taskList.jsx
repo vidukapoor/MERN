@@ -42,7 +42,6 @@ class TaskList extends Component {
     }
 
     dateFormatter(date) {
-        console.log(date)
         if(!date)
             return "----";
         var objDate = new Date(date);
@@ -62,7 +61,6 @@ class TaskList extends Component {
     render() {
         const _this = this;
         const { taskList } = this.state;
-        console.log("taskList", taskList)
         return (
             <div>
                 <h2>All Task List</h2>

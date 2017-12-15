@@ -7,8 +7,8 @@
  * //todo: need to check the session storage at login
  */
 function isLoggedIn(req, res, next) {
-    console.log("req.auth", req.isAuthenticated())
-    console.log("req.user", req.user)
+    // console.log("req.auth", req.isAuthenticated())
+    // console.log("req.user", req.user)
     // if (req.isAuthenticated()) {
       return next();
     // }

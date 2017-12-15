@@ -25799,6 +25799,8 @@ var Home = function (_Component) {
     _createClass(Home, [{
         key: "handleTaskSave",
         value: function handleTaskSave() {
+            var _this2 = this;
+
             console.log(this.object);
             var isRequired = _requests2.default.fieldValidations(this.refs);
             if (isRequired) {
@@ -25808,6 +25810,10 @@ var Home = function (_Component) {
             _requests2.default.sendXmlHttpRequest(createTask, 'POST', this.object, function (result, error) {
                 console.log(result);
                 if (result && result.success) {
+                    _this2.refs.title.value = null;
+                    _this2.refs.description.value = null;
+                    _this2.refs.label.value = null;
+                    _this2.refs.dueDate.value = null;
                     alert('task saved successfully');
                 } else {
                     alert('data saved error');
@@ -25822,7 +25828,7 @@ var Home = function (_Component) {
     }, {
         key: "render",
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             return _react2.default.createElement(
                 "div",
@@ -25850,7 +25856,7 @@ var Home = function (_Component) {
                                 "th",
                                 null,
                                 _react2.default.createElement("input", { placeholder: "Title", ref: "title", "data-required": true, errmsg: "title is required", onChange: function onChange(event) {
-                                        return _this2.getAllValues('title', event.target.value);
+                                        return _this3.getAllValues('title', event.target.value);
                                     } })
                             )
                         ),
@@ -25866,7 +25872,7 @@ var Home = function (_Component) {
                                 "th",
                                 null,
                                 _react2.default.createElement("textarea", { placeholder: "Describe", ref: "description", "data-required": true, errmsg: "description is required", onChange: function onChange(event) {
-                                        return _this2.getAllValues('description', event.target.value);
+                                        return _this3.getAllValues('description', event.target.value);
                                     } })
                             )
                         ),
@@ -25884,7 +25890,7 @@ var Home = function (_Component) {
                                 _react2.default.createElement(
                                     "select",
                                     { onChange: function onChange(event) {
-                                            return _this2.getAllValues('label', event.target.value);
+                                            return _this3.getAllValues('label', event.target.value);
                                         }, ref: "label", "data-required": true, errmsg: "label is required" },
                                     _react2.default.createElement(
                                         "option",
@@ -25916,7 +25922,7 @@ var Home = function (_Component) {
                                 "th",
                                 null,
                                 _react2.default.createElement("input", { type: "date", onChange: function onChange(event) {
-                                        return _this2.getAllValues('dueDate', new Date(event.target.value));
+                                        return _this3.getAllValues('dueDate', new Date(event.target.value));
                                     }, ref: "dueDate", "data-required": true, errmsg: "due date is required" })
                             )
                         ),
@@ -26027,7 +26033,6 @@ var TaskList = function (_Component) {
         key: "handleAction",
         value: function handleAction(id) {
             var _this = this;
-            console.log("delete id", id);
             if (!confirm("sure want to delete the record")) return;
             _requests2.default.sendXmlHttpRequest(deleteTask, 'POST', { taskId: id }, function (result, error) {
                 if (result && result.success) {

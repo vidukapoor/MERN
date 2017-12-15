@@ -22,6 +22,10 @@ class Home extends Component {
         Utils.sendXmlHttpRequest(createTask, 'POST', this.object, (result, error) => {
             console.log(result)
             if (result && result.success) {
+                this.refs.title.value = null;
+                this.refs.description.value = null;
+                this.refs.label.value = null;
+                this.refs.dueDate.value = null;
                 alert('task saved successfully')
             } else {
                 alert('data saved error')
