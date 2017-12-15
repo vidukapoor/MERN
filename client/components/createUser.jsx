@@ -1,11 +1,14 @@
 import React, {Component} from "react";
-import Utils from "../utils/requests"
-const createuser = "http://localhost:8000/createuser"
+import Utils from "../utils/requests";
+import { Redirect } from 'react-router-dom';
+import { DEFAULT_BASEPATH } from "../utils/constants.js";
+const createuser = DEFAULT_BASEPATH + "/createuser"
 
 class CreateUser extends Component{
     constructor(props){
         super(props);
-        this.object = {}
+        this.object = {};
+        this.state = { isUserCreated: false }
         this.handleSave = this.handleSave.bind(this);
         this.getAllValues = this.getAllValues.bind(this);
         return this;
@@ -21,9 +24,10 @@ class CreateUser extends Component{
         Utils.sendXmlHttpRequest(createuser, 'POST', this.object, (result, error) =>{
             console.log(result)
             if(result && result.success){
-                alert('data saved successfully Goto login')
+                alert('data saved successfully Goto login'); 
+                this.setState({ isUserCreated: true });
             }else{
-                alert('data saved error')
+                alert('user creation error')
             }
         })
     }
@@ -32,19 +36,20 @@ class CreateUser extends Component{
         this.object[fieldName] = value
     }
 
-    render(){
+    render() {
+        const { isUserCreated } = this.state;
         return (
-            <div>
+            <div>{isUserCreated ? <Redirect to="/login" /> : <div>
                 <h2>User details</h2>
-                <input placeholder="name" type="text" onChange={event => this.getAllValues("name", event.target.value)}/>
-                <br/>
-                <input placeholder="phone number" type="number" onChange={event => this.getAllValues("contact", event.target.value)}/>
-                <br/>
-                <input placeholder="email" type="email" ref={"email"} data-required={true} errmsg={"email is required"} onChange={event => this.getAllValues("email", event.target.value)}/><br/>
-                <input placeholder="password" type="password" ref={"password"} data-required={true} errmsg={"password is required"} onChange={event => this.getAllValues("password", event.target.value)}/><br/>
+                <input placeholder="name" type="text" onChange={event => this.getAllValues("name", event.target.value)} />
+                <br />
+                <input placeholder="phone number" type="number" onChange={event => this.getAllValues("contact", event.target.value)} />
+                <br />
+                <input placeholder="email" type="email" ref={"email"} data-required={true} errmsg={"email is required"} onChange={event => this.getAllValues("email", event.target.value)} /><br />
+                <input placeholder="password" type="password" ref={"password"} data-required={true} errmsg={"password is required"} onChange={event => this.getAllValues("password", event.target.value)} /><br />
                 <button onClick={this.handleSave}>Create User</button>
-            </div>
-        )   
+            </div>}</div>
+        )
     }
 }
 export default CreateUser;

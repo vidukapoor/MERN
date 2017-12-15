@@ -4,8 +4,10 @@ const taskSchema = new mongoose.Schema({
     userId: String,
     title: { type: String, required: true },
     description: { type: String, required: true },
-    status:{type: String, enum: ['pending', 'onProgress', 'done'], default:"pending"},
-    timeStamp: {type:Date, default:new Date()}
+    label: { type: String, required: true, enum: ['personal', 'work', 'shopping'] },
+    status: { type: String, enum: ['pending', 'onProgress', 'done'], default: "pending" },
+    dueDate: { type: Date, required: true },
+    timeStamp: { type: Date, default: new Date() }
 });
 module.exports = mongoose.model("tasks", taskSchema);
 

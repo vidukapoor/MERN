@@ -1,15 +1,23 @@
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy
 const userModel = require('../models/user_model');
 
 class UserHandlers {
     constructor() {
+        passport.use(userModel.createStrategy());
+        passport.serializeUser(userModel.serializeUser());
+        passport.deserializeUser(userModel.deserializeUser());
         this.self = this;
-        // console.log("user constructor called");
     }
 
     createuser(dataTosave, cb) {
+        const {email, password} = dataTosave;
+        console.log("email", email);
+        console.log("password", password);
         var newUser = userModel(dataTosave);
         try {
-            newUser.save((err, res) => {
+            console.log('creting user');            
+            userModel.register(newUser, password, (err, res) => {
                 if (err) {
                     cb({ success: false, result: err });
                 } else if (res && cb) {
@@ -43,6 +51,23 @@ class UserHandlers {
         } catch (e) {
             cb({ success: false, result: e.message })
         }
+    }
+
+    loginUser(payload, cb) {
+        console.log("login", payload);
+        const { email, password } = payload;
+        var authenticate = userModel.authenticate();
+        authenticate(email, password, function (err, result) {
+            if (err) {
+                console.log('error', err);
+                cb({ success: false, result: err });
+            } else if (!result) {
+                console.log('result', result);
+                cb({ success: false, result: result });
+            } else {
+                cb({ success: true, result: result });
+            }
+        });
     }
 }
 const userHandlers = new UserHandlers();

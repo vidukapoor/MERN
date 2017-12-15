@@ -2,6 +2,7 @@ class utils {
     constructor() {
 
     }
+    
     sendXmlHttpRequest(url, method, data, callback) {
         var xmlhttp;
         var self = this;
@@ -26,6 +27,8 @@ class utils {
             // xmlhttp.setRequestHeader('x-api-key', data.apiKey)         //for sending headers
             if (data)
                 xmlhttp.send(JSON.stringify(data));
+            else
+                xmlhttp.send();
         }
     }
 

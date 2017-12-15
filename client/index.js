@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import routes from "../client/routes/routes";
 import { BrowserRouter as Router, Route, HashRouter} from 'react-router-dom'
 
-console.log(routes);
 // ReactDOM.render(<AppContainer/>, document.getElementById('app'));
 
 ReactDOM.render((

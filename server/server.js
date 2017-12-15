@@ -2,9 +2,16 @@ var path = require('path');
 var fs = require('fs');
 var express = require('express');
 var app = express();
+var passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 var indexRoutes = require('./routes/restDispatcher');
 const mongo = require('./mongo/mongoconfig');
-const bodyParser = require('body-parser');         //for getting body in request
+const bodyParser = require('body-parser');                      //for getting body in request
+const user = require('../server/models/user_model');
+
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // parse application/x-www-form-urlencoded   always call before route
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,27 +44,12 @@ app.use(function(err, req, res, next){
     }
 })
 
+passport.use('local-user', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+}, user.authenticate()));
 
-// //server app
-// var port  = 8000;
-// app.listen(port, function(){
-//     console.log('localhost running:'+ port)
-// })
-
-//working of promise
-
-// let promise = new Promise((resolve, reject)=>{
-//     setTimeout(function(){
-//         resolve('done data response');
-//     })
-//     reject('promise rejecteddddddddddd')
-// })
-// if(promise){
-//     promise.then((body)=>{
-//         console.log('jhjhj', body)
-//     }).catch(function(reason){
-//         console.log("aaaaa",reason)
-//     })
-// }
-
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
+  
 module.exports = app;
