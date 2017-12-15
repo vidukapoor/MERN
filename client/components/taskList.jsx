@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import { DEFAULT_BASEPATH } from "../utils/constants.js";
 import Utils from "../utils/requests";
-const getAllTask = DEFAULT_BASEPATH + "/getTasks"
+const getAllTask = DEFAULT_BASEPATH + "/getTasks";
+const deleteTask = DEFAULT_BASEPATH + "/deleteTask";
 
 class TaskList extends Component {
     constructor(props) {
         super(props);
         this.state = { taskList: [] }
+        this.handleAction = this.handleAction.bind(this);
         return this;
     }
 
@@ -20,9 +22,21 @@ class TaskList extends Component {
         Utils.sendXmlHttpRequest(getAllTask, 'GET', null, (result, error) => {
             if (result && result.success) {
                 this.setState({ taskList: result.result })
-                console.log("ok done")
             } else {
                 alert('error in getting list')
+            }
+        })
+    }
+
+    handleAction(id) {
+        const _this = this;
+        if (!confirm("sure want to delete the record"))
+            return;
+        Utils.sendXmlHttpRequest(deleteTask, 'POST', { taskId: id }, (result, error) => {
+            if (result && result.success) {
+                _this.getAllTaskData();
+            } else {
+                alert('error in deleting list')
             }
         })
     }
@@ -62,6 +76,7 @@ class TaskList extends Component {
                             <th>status</th>
                             <th>Label</th>
                             <th>Due Date</th>
+                            <th>Action</th>
                         </tr>
                         {taskList.map(function (task, id) {
                             return (
@@ -72,6 +87,10 @@ class TaskList extends Component {
                                     <td><center>{task.status}</center></td>
                                     <td><center>{task.label}</center></td>
                                     <td><center>{_this.dateFormatter(task.dueDate)}</center></td>
+                                    <td><center>
+                                        <button onClick={event => _this.handleAction(task._id)}>Delete</button>
+                                        </center>
+                                    </td>
                                 </tr>
                             )
                         })}

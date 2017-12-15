@@ -29,6 +29,18 @@ class TaskHandlers {
             cb({ success: false, result: e.message });
         }
     }
+
+    deleteTask(payload, cb) {
+        const taskId = payload.taskId;
+        try {
+            taskModel.remove({ _id: taskId },(err, res) => {
+                cb({ success: true, result: res });
+            });
+        } catch (e) {
+            cb({ success: false, result: e.message });
+        }
+    }
+
 }
 const taskHandlers = new TaskHandlers();
 module.exports = taskHandlers;

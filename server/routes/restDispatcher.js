@@ -44,7 +44,6 @@ router.get('/getUsers/:userId', function (req, res) {
 
 /***************************** <start>task dispatchers *********************************/
 router.post('/createTask', isLoggedIn, function(req, res){
-    console.log("createTask path hit");
     const body = req.body;
     var response = taskHandlers.createTask(body, (success)=>{
         res.json(success)
@@ -52,11 +51,16 @@ router.post('/createTask', isLoggedIn, function(req, res){
 })
 
 router.get('/getTasks', isLoggedIn, function(req, res){
-    console.log("getTask path hit");
     var response = taskHandlers.getTask((success)=>{
         res.json(success);
     });
 })
 
+router.post('/deleteTask', isLoggedIn, function (req, res) {
+    const body = req.body;
+    var response = taskHandlers.deleteTask(body, (success) => {
+        res.json(success);
+    });
+})
 /***************************** <end>task dispatchers **********************************/
 module.exports = router;

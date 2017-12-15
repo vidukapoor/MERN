@@ -54,7 +54,7 @@ class UserHandlers {
     }
 
     loginUser(payload, cb) {
-        console.log("login", payload);
+        console.log("login_payload", payload);
         const { email, password } = payload;
         var authenticate = userModel.authenticate();
         authenticate(email, password, function (err, result) {

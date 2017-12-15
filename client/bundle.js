@@ -25987,6 +25987,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var getAllTask = _constants.DEFAULT_BASEPATH + "/getTasks";
+var deleteTask = _constants.DEFAULT_BASEPATH + "/deleteTask";
 
 var TaskList = function (_Component) {
     _inherits(TaskList, _Component);
@@ -25999,6 +26000,7 @@ var TaskList = function (_Component) {
         var _this2 = _possibleConstructorReturn(this, (TaskList.__proto__ || Object.getPrototypeOf(TaskList)).call(this, props));
 
         _this2.state = { taskList: [] };
+        _this2.handleAction = _this2.handleAction.bind(_this2);
         return _ret = _this2, _possibleConstructorReturn(_this2, _ret);
     }
 
@@ -26016,9 +26018,22 @@ var TaskList = function (_Component) {
             _requests2.default.sendXmlHttpRequest(getAllTask, 'GET', null, function (result, error) {
                 if (result && result.success) {
                     _this3.setState({ taskList: result.result });
-                    console.log("ok done");
                 } else {
                     alert('error in getting list');
+                }
+            });
+        }
+    }, {
+        key: "handleAction",
+        value: function handleAction(id) {
+            var _this = this;
+            console.log("delete id", id);
+            if (!confirm("sure want to delete the record")) return;
+            _requests2.default.sendXmlHttpRequest(deleteTask, 'POST', { taskId: id }, function (result, error) {
+                if (result && result.success) {
+                    _this.getAllTaskData();
+                } else {
+                    alert('error in deleting list');
                 }
             });
         }
@@ -26102,6 +26117,11 @@ var TaskList = function (_Component) {
                                 "th",
                                 null,
                                 "Due Date"
+                            ),
+                            _react2.default.createElement(
+                                "th",
+                                null,
+                                "Action"
                             )
                         ),
                         taskList.map(function (task, id) {
@@ -26160,6 +26180,21 @@ var TaskList = function (_Component) {
                                         "center",
                                         null,
                                         _this.dateFormatter(task.dueDate)
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "td",
+                                    null,
+                                    _react2.default.createElement(
+                                        "center",
+                                        null,
+                                        _react2.default.createElement(
+                                            "button",
+                                            { onClick: function onClick(event) {
+                                                    return _this.handleAction(task._id);
+                                                } },
+                                            "Delete"
+                                        )
                                     )
                                 )
                             );
