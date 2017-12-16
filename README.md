@@ -1,6 +1,6 @@
-run commands
-    npm run webpack
-    node www
+    run commands: 
+        npm run webpack
+        node www
 
     auto start
         nodemon www
